@@ -23,6 +23,7 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.apache.commons.compress.archivers.zip.ZipFile;
@@ -74,6 +75,12 @@ public abstract class GtfsInput implements Closeable {
           new InvalidInputFilesInSubfolderNotice(invalidInputMessage));
     }
     return new GtfsZipFileInput(zipFile, fileName);
+  }
+
+  public static GtfsInput createFromDB(String db_name, String company_id)
+          throws SQLException {
+
+    return new GtfsDatabaseInput(db_name, company_id);
   }
 
   /**
@@ -182,7 +189,7 @@ public abstract class GtfsInput implements Closeable {
    *
    * @return base names of all available files
    */
-  public abstract ImmutableSet<String> getFilenames();
+  public abstract ImmutableSet<String> getFilenames() throws SQLException;
 
   /**
    * Returns a stream to read data from a given file.
@@ -191,5 +198,5 @@ public abstract class GtfsInput implements Closeable {
    * @return an stream to read the file data
    * @throws IOException if no file could not be found at the specified location
    */
-  public abstract InputStream getFile(String filename) throws IOException;
+  public abstract InputStream getFile(String filename) throws IOException, SQLException;
 }

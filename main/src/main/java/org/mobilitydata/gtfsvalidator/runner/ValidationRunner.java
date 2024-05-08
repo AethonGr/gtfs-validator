@@ -26,7 +26,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -74,7 +76,7 @@ public class ValidationRunner {
   }
 
   @MemoryMonitor
-  public Status run(ValidationRunnerConfig config) {
+  public Status run(ValidationRunnerConfig config) throws SQLException {
     MemoryUsageRegister.getInstance().clearRegistry();
     // Registering the memory metrics manually to avoid multiple entries due to concurrent calls
     // and exclude from the metric the generation of the reports.
@@ -117,8 +119,10 @@ public class ValidationRunner {
     } catch (URISyntaxException e) {
       logger.atSevere().withCause(e).log("Syntax error in URI");
       noticeContainer.addSystemError(new URISyntaxError(e));
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
-    if (gtfsInput == null) {
+      if (gtfsInput == null) {
       exportReport(null, noticeContainer, config, versionInfo);
       if (!noticeContainer.getSystemErrors().isEmpty()) {
         return Status.SYSTEM_ERRORS;
@@ -272,7 +276,7 @@ public class ValidationRunner {
       NoticeContainer noticeContainer,
       GtfsInput gtfsInput,
       ValidationContext validationContext)
-      throws InterruptedException {
+          throws InterruptedException, SQLException {
     GtfsFeedContainer feedContainer;
     feedContainer =
         feedLoader.loadAndValidate(
@@ -348,7 +352,7 @@ public class ValidationRunner {
    * @throws URISyntaxException in case of error in the {@code URL} syntax
    */
   public static GtfsInput createGtfsInput(ValidationRunnerConfig config, String validatorVersion)
-      throws IOException, URISyntaxException {
+          throws IOException, URISyntaxException, SQLException {
     return createGtfsInput(config, validatorVersion, new NoticeContainer());
   }
 
@@ -356,20 +360,27 @@ public class ValidationRunner {
       ValidationRunnerConfig config,
       String validatorVersion,
       @Nonnull NoticeContainer noticeContainer)
-      throws IOException, URISyntaxException {
-    URI source = config.gtfsSource();
-    if (source.getScheme().equals("file")) {
-      return GtfsInput.createFromPath(Paths.get(source), noticeContainer);
-    }
+          throws IOException, URISyntaxException, SQLException {
 
-    if (config.storageDirectory().isEmpty()) {
-      return GtfsInput.createFromUrlInMemory(source.toURL(), noticeContainer, validatorVersion);
+    if (config.gtfsSource().toString().split(",").length > 1) {
+      return GtfsInput.createFromDB(config.gtfsSource().toString().split(",")[0], config.gtfsSource().toString().split(",")[1]);
     } else {
-      return GtfsInput.createFromUrl(
-          source.toURL(),
-          config.storageDirectory().get().resolve(GTFS_ZIP_FILENAME),
-          noticeContainer,
-          validatorVersion);
+
+      URI source = (URI) config.gtfsSource();
+
+      if (source.getScheme().equals("file")) {
+        return GtfsInput.createFromPath(Paths.get(source), noticeContainer);
+      }
+
+      if (config.storageDirectory().isEmpty()) {
+        return GtfsInput.createFromUrlInMemory(source.toURL(), noticeContainer, validatorVersion);
+      } else {
+        return GtfsInput.createFromUrl(
+                source.toURL(),
+                config.storageDirectory().get().resolve(GTFS_ZIP_FILENAME),
+                noticeContainer,
+                validatorVersion);
+      }
     }
   }
 }
