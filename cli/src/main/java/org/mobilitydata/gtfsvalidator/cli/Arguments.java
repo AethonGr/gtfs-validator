@@ -37,6 +37,16 @@ public class Arguments {
   private String input;
 
   @Parameter(
+          names = {"-db", "--database"},
+          description = "Name of database to use")
+  private String database;
+
+  @Parameter(
+          names = {"-cid", "--company_id"},
+          description = "Company id to use")
+  private String company_id;
+
+  @Parameter(
       names = {"-o", "--output_base"},
       description = "Base directory to store the outputs",
       required = true)
@@ -119,6 +129,8 @@ public class Arguments {
       if (storageDirectory != null) {
         builder.setStorageDirectory(Path.of(storageDirectory));
       }
+    } else if (database != null){
+      builder.setGtfsSource(database + "," + company_id);
     }
     if (outputBase != null) {
       builder.setOutputDirectory(Path.of(outputBase));
@@ -166,12 +178,12 @@ public class Arguments {
       return true;
     }
 
-    if (input == null && url == null) {
+    if (input == null && url == null && database == null) {
       logger.atSevere().log(
-          "One of the two following CLI parameter must be provided: '--input' and '--url'");
+          "One of the three following CLI parameter must be provided: '--input' or '--url' or '--database' with the corresponding company id");
       return false;
     }
-    if (input != null && url != null) {
+    if (input != null && url != null && database == null) {
       logger.atSevere().log(
           "The two following CLI parameters cannot be provided at the same time:"
               + " '--input' and '--url'");
@@ -180,6 +192,12 @@ public class Arguments {
     if (storageDirectory != null && url == null) {
       logger.atSevere().log(
           "CLI parameter '--storage_directory' must not be provided if '--url' is not provided");
+      return false;
+    }
+
+    if (database != null && company_id == null) {
+      logger.atSevere().log(
+              "Database parameter '--company_id' must be provided if '--database' is provided");
       return false;
     }
 

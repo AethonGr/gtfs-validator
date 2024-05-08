@@ -26,7 +26,7 @@ import org.mobilitydata.gtfsvalidator.input.CountryCode;
 @AutoValue
 public abstract class ValidationRunnerConfig {
   // The GTFS input, as a URI to a local file or an external URL.
-  public abstract URI gtfsSource();
+  public abstract Object gtfsSource();
 
   // The directory where all validation reports will be written.
   public abstract Path outputDirectory();
@@ -81,7 +81,7 @@ public abstract class ValidationRunnerConfig {
 
   @AutoValue.Builder
   public abstract static class Builder {
-    public abstract Builder setGtfsSource(URI gtfsSource);
+    public abstract Builder setGtfsSource(Object gtfsSource);
 
     public abstract Builder setOutputDirectory(Path outputDirectory);
 

@@ -19,6 +19,7 @@ package org.mobilitydata.gtfsvalidator.table;
 import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -92,42 +93,79 @@ public class GtfsFeedLoader {
   @SuppressWarnings("unchecked")
   public GtfsFeedContainer loadAndValidate(
       GtfsInput gtfsInput, ValidatorProvider validatorProvider, NoticeContainer noticeContainer)
-      throws InterruptedException {
+          throws InterruptedException, SQLException {
     logger.atInfo().log("Loading in %d threads", numThreads);
     ExecutorService exec = Executors.newFixedThreadPool(numThreads);
 
     List<Callable<TableAndNoticeContainers>> loaderCallables = new ArrayList<>();
     Map<String, GtfsTableDescriptor<?>> remainingDescriptors =
         (Map<String, GtfsTableDescriptor<?>>) tableDescriptors.clone();
-    for (String filename : gtfsInput.getFilenames()) {
-      GtfsTableDescriptor<?> tableDescriptor = remainingDescriptors.remove(filename.toLowerCase());
-      if (tableDescriptor == null) {
-        noticeContainer.addValidationNotice(new UnknownFileNotice(filename));
-      } else {
-        loaderCallables.add(
-            () -> {
-              NoticeContainer loaderNotices = new NoticeContainer();
-              GtfsTableContainer<?> tableContainer;
-              try (InputStream inputStream = gtfsInput.getFile(filename)) {
-                try {
-                  tableContainer =
-                      AnyTableLoader.load(
-                          tableDescriptor, validatorProvider, inputStream, loaderNotices);
-                } catch (RuntimeException e) {
-                  // This handler should prevent ExecutionException for
-                  // this thread. We catch an exception here for storing
-                  // the context since we know the filename here.
-                  logger.atSevere().withCause(e).log("Runtime exception when loading %s", filename);
-                  loaderNotices.addSystemError(new RuntimeExceptionInLoaderError(filename, e));
-                  // Since the file was not loaded successfully, we treat
-                  // it as missing for continuing validation.
-                  tableContainer =
-                      AnyTableLoader.loadMissingFile(
-                          tableDescriptor, validatorProvider, loaderNotices);
-                }
-              }
-              return new TableAndNoticeContainers(tableContainer, loaderNotices);
-            });
+    String gtfs_class = gtfsInput.getClass().getSimpleName();
+
+    if (gtfs_class.equals("GtfsDatabaseInput")){
+      for (String filename : gtfsInput.getFilenames()) {
+        GtfsTableDescriptor<?> tableDescriptor = remainingDescriptors.remove(filename.toLowerCase());
+        if (tableDescriptor == null) {
+          noticeContainer.addValidationNotice(new UnknownFileNotice(filename));
+        } else {
+          loaderCallables.add(
+                  () -> {
+                    NoticeContainer loaderNotices = new NoticeContainer();
+                    GtfsTableContainer<?> tableContainer;
+                    try (InputStream inputStream = gtfsInput.getFile(filename)) {
+                      try {
+                        tableContainer =
+                                AnyTableLoader.load(
+                                        tableDescriptor, validatorProvider, inputStream, loaderNotices);
+                      } catch (RuntimeException e) {
+                        // This handler should prevent ExecutionException for
+                        // this thread. We catch an exception here for storing
+                        // the context since we know the filename here.
+                        logger.atSevere().withCause(e).log("Runtime exception when loading %s", filename);
+                        loaderNotices.addSystemError(new RuntimeExceptionInLoaderError(filename, e));
+                        // Since the file was not loaded successfully, we treat
+                        // it as missing for continuing validation.
+                        tableContainer =
+                                AnyTableLoader.loadMissingFile(
+                                        tableDescriptor, validatorProvider, loaderNotices);
+                      }
+                    }
+                    return new TableAndNoticeContainers(tableContainer, loaderNotices);
+                  });
+        }
+      }
+    }
+    else {
+      for (String filename : gtfsInput.getFilenames()) {
+        GtfsTableDescriptor<?> tableDescriptor = remainingDescriptors.remove(filename.toLowerCase());
+        if (tableDescriptor == null) {
+          noticeContainer.addValidationNotice(new UnknownFileNotice(filename));
+        } else {
+          loaderCallables.add(
+                  () -> {
+                    NoticeContainer loaderNotices = new NoticeContainer();
+                    GtfsTableContainer<?> tableContainer;
+                    try (InputStream inputStream = gtfsInput.getFile(filename)) {
+                      try {
+                        tableContainer =
+                                AnyTableLoader.load(
+                                        tableDescriptor, validatorProvider, inputStream, loaderNotices);
+                      } catch (RuntimeException e) {
+                        // This handler should prevent ExecutionException for
+                        // this thread. We catch an exception here for storing
+                        // the context since we know the filename here.
+                        logger.atSevere().withCause(e).log("Runtime exception when loading %s", filename);
+                        loaderNotices.addSystemError(new RuntimeExceptionInLoaderError(filename, e));
+                        // Since the file was not loaded successfully, we treat
+                        // it as missing for continuing validation.
+                        tableContainer =
+                                AnyTableLoader.loadMissingFile(
+                                        tableDescriptor, validatorProvider, loaderNotices);
+                      }
+                    }
+                    return new TableAndNoticeContainers(tableContainer, loaderNotices);
+                  });
+        }
       }
     }
     ArrayList<GtfsTableContainer<?>> tableContainers = new ArrayList<>();
