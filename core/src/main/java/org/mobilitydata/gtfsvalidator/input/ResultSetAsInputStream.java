@@ -1,8 +1,5 @@
 package org.mobilitydata.gtfsvalidator.input;
 
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -24,7 +21,13 @@ public class ResultSetAsInputStream extends InputStream {
 
     private static PreparedStatement createStatement(final Connection connection, final String sql, final Object[] parameters) throws SQLException {
         // PreparedStatement should be created here from passed connection, sql and parameters
-        return connection.prepareStatement(sql);
+        PreparedStatement prepStatement=connection.prepareStatement(sql);
+        if (parameters.length > 0) {
+            prepStatement.setInt(1, (Integer) parameters[0]);
+            // Set the offset
+            prepStatement.setInt(2, (Integer) parameters[1]);
+        }
+        return prepStatement;
     }
 
     @Override

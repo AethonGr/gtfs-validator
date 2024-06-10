@@ -2,7 +2,7 @@
   <configuration default="false" name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="org.mobilitydata.gtfsvalidator.cli.Main" />
     <module name="gtfs-validator.cli.main" />
-    <option name="PROGRAM_PARAMETERS" value="-db working_data -cid 49 -o C:\Users\aetho\Documents\output\ -p -t 4" />
+    <option name="PROGRAM_PARAMETERS" value="-db working_data -cid 66 -o C:\Users\aetho\Documents\output\ -p -t 1" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="org.mobilitydata.gtfsvalidator.cli.*" />
