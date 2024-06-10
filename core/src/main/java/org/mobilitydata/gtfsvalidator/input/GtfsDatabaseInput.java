@@ -1,5 +1,6 @@
 package org.mobilitydata.gtfsvalidator.input;
 import com.google.common.collect.ImmutableSet;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,18 +9,25 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class GtfsDatabaseInput extends GtfsInput {
 
-    private final Connection conn;
+    private Connection conn;
 
     private final String company_id;
 
+    private final String db;
+
 
     public GtfsDatabaseInput(String db, String company_id) throws  SQLException {
-
+        this.db = db;
         this.company_id = company_id;
+        this.conn = ConnectDB();
 
+    }
+
+    public Connection ConnectDB() throws SQLException {
         String host = null;
         String user = null;
         String password = null;
@@ -34,17 +42,16 @@ public class GtfsDatabaseInput extends GtfsInput {
             password = "0112358";
         }
 
-        String connection_url = "jdbc:mysql://" + host + ":3306/" + db;
+        String connection_url = "jdbc:mysql://" + host + ":3306/" + this.db;
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.conn = DriverManager.getConnection(connection_url, user, password);
+            return DriverManager.getConnection(connection_url, user, password);
 
         } catch (ClassNotFoundException | SQLException e){
 
             throw new SQLException("Exception while connecting to database! Exception : " + e);
         }
-
     }
     public Connection getConn() {
         return conn;
@@ -70,6 +77,13 @@ public class GtfsDatabaseInput extends GtfsInput {
         }
 
         return columns;
+    }
+
+    private int getTableCount(String filename) throws SQLException {
+        String tableName = filename.substring(0, filename.lastIndexOf('.'));
+        ResultSet count_rs = this.ExecuteQuery("SELECT COUNT(*) FROM " + tableName + ";");
+        count_rs.next();
+        return count_rs.getInt(1);
     }
 
 
@@ -425,7 +439,39 @@ public class GtfsDatabaseInput extends GtfsInput {
 
         String select_query = getQueryString(filename);
         int ColumnsCount = getColumns(filename).split(",").length;
-        return new ResultSetAsInputStream(this.conn, select_query, ColumnsCount);
+        int TableCount = getTableCount(filename);
+
+
+        int PageSize = 500000;
+        int numOfPages = Math.round((float) TableCount/PageSize);
+
+        if (TableCount > PageSize){
+            select_query = StringUtils.chop(select_query);
+            String header_query = select_query.split("UNION")[0] + ";";
+
+            InputStream ResultSetInputStream = new ResultSetAsInputStream(this.conn, header_query, ColumnsCount);
+
+            select_query = select_query.split("UNION")[1];
+
+            for(int i = 0; i<=numOfPages; i++) {
+
+                String LimitedOffsetSelectQuery = select_query + " LIMIT ? OFFSET ?;";
+
+                InputStream ResultSetInputStreamOff = new ResultSetAsInputStream(this.conn, LimitedOffsetSelectQuery, ColumnsCount, PageSize, i*PageSize);
+
+
+                ResultSetInputStream = new java.io.SequenceInputStream(ResultSetInputStream, ResultSetInputStreamOff);
+
+            }
+            return ResultSetInputStream;
+
+        }else{
+
+            return new ResultSetAsInputStream(this.conn, select_query, ColumnsCount);
+
+        }
+
+
     }
 }
 
