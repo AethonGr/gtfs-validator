@@ -3,7 +3,7 @@
     <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-23" />
     <option name="MAIN_CLASS_NAME" value="org.mobilitydata.gtfsvalidator.cli.Main" />
     <module name="gtfs-validator.cli.main" />
-    <option name="PROGRAM_PARAMETERS" value="-db working_data -cid 80 -o C:\Users\aetho\Documents\output\ -p -t 1" />
+    <option name="PROGRAM_PARAMETERS" value="-db working_data -cid 66 -o C:\Users\aetho\Documents\output\ -p -t 1" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="org.mobilitydata.gtfsvalidator.cli.*" />
