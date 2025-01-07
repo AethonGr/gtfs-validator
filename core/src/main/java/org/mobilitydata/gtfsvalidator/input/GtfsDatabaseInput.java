@@ -103,14 +103,14 @@ public class GtfsDatabaseInput extends GtfsInput {
                               "'agency_email' AS agency_email" +
                               " UNION " +
                               " SELECT " +
-                              "COALESCE(agency_id, '') AS agency_id," +
-                              "COALESCE(agency_name, '') AS agency_name," +
-                              "COALESCE(agency_url, '') AS agency_url," +
-                              "COALESCE(agency_timezone, '') AS agency_timezone," +
-                              "COALESCE(agency_lang, '') AS agency_lang," +
-                              "COALESCE(agency_phone, '') AS agency_phone," +
-                              "COALESCE(agency_fare_url, '') AS agency_fare_url," +
-                              "COALESCE(agency_email, '') AS agency_email" +
+                              "CONCAT('\"',COALESCE(agency_id, ''), '\"')  AS agency_id," +
+                              "CONCAT('\"',COALESCE(agency_name, ''), '\"')  AS agency_name," +
+                              "CONCAT('\"',COALESCE(agency_url, ''), '\"')  AS agency_url," +
+                              "CONCAT('\"',COALESCE(agency_timezone, ''), '\"')  AS agency_timezone," +
+                              "CONCAT('\"',COALESCE(agency_lang, ''), '\"')  AS agency_lang," +
+                              "CONCAT('\"',COALESCE(agency_phone, ''), '\"')  AS agency_phone," +
+                              "CONCAT('\"',COALESCE(agency_fare_url, ''), '\"')  AS agency_fare_url," +
+                              "CONCAT('\"',COALESCE(agency_email, ''), '\"')  AS agency_email" +
                               " FROM agency WHERE company_id = " + company_id + " ;");
 
         queries.put("routes", "SELECT " +
@@ -128,18 +128,18 @@ public class GtfsDatabaseInput extends GtfsInput {
                               "'continuous_drop_off' AS continuous_drop_off" +
                               " UNION " +
                               " SELECT " +
-                              "COALESCE(route_id, '') AS route_id," +
-                              "COALESCE(agency_id, '') AS agency_id," +
-                              "COALESCE(route_short_name, '') AS route_short_name," +
-                              "COALESCE(route_long_name, '') AS route_long_name," +
-                              "COALESCE(route_desc, '') AS route_desc," +
-                              "COALESCE(route_type, '') AS route_type," +
-                              "COALESCE(route_url, '') AS route_url," +
-                              "COALESCE(route_color, '') AS route_color," +
-                              "COALESCE(route_text_color, '') AS route_text_color," +
-                              "COALESCE(route_sort_order, '') AS route_sort_order," +
-                              "COALESCE(continuous_pickup, '') AS continuous_pickup," +
-                              "COALESCE(continuous_drop_off, '') AS continuous_drop_off" +
+                              "CONCAT('\"',COALESCE(route_id, ''), '\"') AS route_id," +
+                              "CONCAT('\"',COALESCE(agency_id, ''), '\"') AS agency_id," +
+                              "CONCAT('\"',COALESCE(route_short_name, ''), '\"') AS route_short_name," +
+                              "CONCAT('\"',COALESCE(route_long_name, ''), '\"') AS route_long_name," +
+                              "CONCAT('\"',COALESCE(route_desc, ''), '\"') AS route_desc," +
+                              "CONCAT('\"',COALESCE(route_type, ''), '\"') AS route_type," +
+                              "CONCAT('\"',COALESCE(route_url, ''), '\"') AS route_url," +
+                              "CONCAT('\"',COALESCE(route_color, ''), '\"') AS route_color," +
+                              "CONCAT('\"',COALESCE(route_text_color, ''), '\"') AS route_text_color," +
+                              "CONCAT('\"',COALESCE(route_sort_order, ''), '\"') AS route_sort_order," +
+                              "CONCAT('\"',COALESCE(continuous_pickup, ''), '\"') AS continuous_pickup," +
+                              "CONCAT('\"',COALESCE(continuous_drop_off, ''), '\"') AS continuous_drop_off" +
                               " FROM routes WHERE company_id = " + company_id + " ;");
 
         queries.put("stops", "SELECT " +
@@ -159,20 +159,20 @@ public class GtfsDatabaseInput extends GtfsInput {
                              "'platform_code' AS platform_code" +
                              " UNION " +
                              " SELECT " +
-                             "COALESCE(stop_id, '') AS stop_id," +
-                             "COALESCE(stop_code, '') AS stop_code," +
-                             "COALESCE(stop_name, '') AS stop_name," +
-                             "COALESCE(stop_desc, '') AS stop_desc," +
-                             "COALESCE(stop_lat, '') AS stop_lat," +
-                             "COALESCE(stop_lon, '') AS stop_lon," +
-                             "COALESCE(zone_id, '') AS zone_id," +
-                             "COALESCE(stop_url, '') AS stop_url," +
-                             "COALESCE(location_type, '') AS location_type," +
-                             "COALESCE(parent_station, '') AS parent_station," +
-                             "COALESCE(stop_timezone, '') AS stop_timezone," +
-                             "COALESCE(wheelchair_boarding, '') AS wheelchair_boarding," +
-                             "COALESCE(level_id, '') AS level_id," +
-                             "COALESCE(platform_code, '') AS platform_code" +
+                             "CONCAT('\"',COALESCE(stop_id, ''), '\"') AS stop_id," +
+                             "CONCAT('\"',COALESCE(stop_code, ''), '\"') AS stop_code," +
+                             "CONCAT('\"',COALESCE(stop_name, ''), '\"') AS stop_name," +
+                             "CONCAT('\"',COALESCE(stop_desc, ''), '\"') AS stop_desc," +
+                             "CONCAT('\"',COALESCE(stop_lat, ''), '\"') AS stop_lat," +
+                             "CONCAT('\"',COALESCE(stop_lon, ''), '\"') AS stop_lon," +
+                             "CONCAT('\"',COALESCE(zone_id, ''), '\"') AS zone_id," +
+                             "CONCAT('\"',COALESCE(stop_url, ''), '\"') AS stop_url," +
+                             "CONCAT('\"',COALESCE(location_type, ''), '\"') AS location_type," +
+                             "CONCAT('\"',COALESCE(parent_station, ''), '\"') AS parent_station," +
+                             "CONCAT('\"',COALESCE(stop_timezone, ''), '\"') AS stop_timezone," +
+                             "CONCAT('\"',COALESCE(wheelchair_boarding, ''), '\"') AS wheelchair_boarding," +
+                             "CONCAT('\"',COALESCE(level_id, ''), '\"') AS level_id," +
+                             "CONCAT('\"',COALESCE(platform_code, ''), '\"') AS platform_code" +
                              " FROM stops WHERE company_id = " + company_id + " ;");
 
         queries.put("trips", "SELECT " +
@@ -188,16 +188,16 @@ public class GtfsDatabaseInput extends GtfsInput {
                              "'bikes_allowed' AS bikes_allowed" +
                              " UNION " +
                              " SELECT " +
-                             "COALESCE(route_id, '') AS route_id," +
-                             "COALESCE(service_id, '') AS service_id," +
-                             "COALESCE(trip_id, '') AS trip_id," +
-                             "COALESCE(trip_headsign, '') AS trip_headsign," +
-                             "COALESCE(trip_short_name, '') AS trip_short_name," +
-                             "COALESCE(direction_id, '') AS direction_id," +
-                             "COALESCE(block_id, '') AS block_id," +
-                             "COALESCE(shape_id, '') AS shape_id," +
-                             "COALESCE(wheelchair_accessible, '') AS wheelchair_accessible," +
-                             "COALESCE(bikes_allowed, '') AS bikes_allowed" +
+                             "CONCAT('\"',COALESCE(route_id, ''), '\"') AS route_id," +
+                             "CONCAT('\"',COALESCE(service_id, ''), '\"') AS service_id," +
+                             "CONCAT('\"',COALESCE(trip_id, ''), '\"') AS trip_id," +
+                             "CONCAT('\"',COALESCE(trip_headsign, ''), '\"') AS trip_headsign," +
+                             "CONCAT('\"',COALESCE(trip_short_name, ''), '\"') AS trip_short_name," +
+                             "CONCAT('\"',COALESCE(direction_id, ''), '\"') AS direction_id," +
+                             "CONCAT('\"',COALESCE(block_id, ''), '\"') AS block_id," +
+                             "CONCAT('\"',COALESCE(shape_id, ''), '\"') AS shape_id," +
+                             "CONCAT('\"',COALESCE(wheelchair_accessible, ''), '\"') AS wheelchair_accessible," +
+                             "CONCAT('\"',COALESCE(bikes_allowed, ''), '\"') AS bikes_allowed" +
                              " FROM trips WHERE company_id = " + company_id + " ;");
 
         queries.put("stop_times", "SELECT " +
@@ -215,18 +215,18 @@ public class GtfsDatabaseInput extends GtfsInput {
                                   "'timepoint' AS timepoint" +
                                   " UNION " +
                                   " SELECT " +
-                                  "COALESCE(trip_id, '') AS trip_id," +
-                                  "COALESCE(arrival_time, '') AS arrival_time," +
-                                  "COALESCE(departure_time, '') AS departure_time," +
-                                  "COALESCE(stop_id, '') AS stop_id," +
-                                  "COALESCE(stop_sequence, '') AS stop_sequence," +
-                                  "COALESCE(stop_headsign, '') AS stop_headsign," +
-                                  "COALESCE(pickup_type, '') AS pickup_type," +
-                                  "COALESCE(drop_off_type, '') AS drop_off_type," +
-                                  "COALESCE(continuous_pickup, '') AS continuous_pickup," +
-                                  "COALESCE(continuous_drop_off, '') AS continuous_drop_off," +
-                                  "COALESCE(ROUND(shape_dist_traveled, 2), '') AS shape_dist_traveled," +
-                                  "COALESCE(timepoint, '') AS timepoint" +
+                                  "CONCAT('\"',COALESCE(trip_id, ''), '\"') AS trip_id," +
+                                  "CONCAT('\"',COALESCE(arrival_time, ''), '\"') AS arrival_time," +
+                                  "CONCAT('\"',COALESCE(departure_time, ''), '\"') AS departure_time," +
+                                  "CONCAT('\"',COALESCE(stop_id, ''), '\"') AS stop_id," +
+                                  "CONCAT('\"',COALESCE(stop_sequence, ''), '\"') AS stop_sequence," +
+                                  "CONCAT('\"',COALESCE(stop_headsign, ''), '\"') AS stop_headsign," +
+                                  "CONCAT('\"',COALESCE(pickup_type, ''), '\"') AS pickup_type," +
+                                  "CONCAT('\"',COALESCE(drop_off_type, ''), '\"') AS drop_off_type," +
+                                  "CONCAT('\"',COALESCE(continuous_pickup, ''), '\"') AS continuous_pickup," +
+                                  "CONCAT('\"',COALESCE(continuous_drop_off, ''), '\"') AS continuous_drop_off," +
+                                  "CONCAT('\"',COALESCE(ROUND(shape_dist_traveled, 2), ''), '\"') AS shape_dist_traveled," +
+                                  "CONCAT('\"',COALESCE(timepoint, '') , '\"')AS timepoint" +
                                   " FROM stop_times WHERE company_id = " + company_id + " ;");
 
         queries.put("calendar", "SELECT " +
@@ -242,16 +242,16 @@ public class GtfsDatabaseInput extends GtfsInput {
                                 "'end_date' AS end_date" +
                                 " UNION " +
                                 " SELECT " +
-                                "COALESCE(service_id, '') AS service_id," +
-                                "COALESCE(monday, '') AS monday," +
-                                "COALESCE(tuesday, '') AS tuesday," +
-                                "COALESCE(wednesday, '') AS wednesday," +
-                                "COALESCE(thursday, '') AS thursday," +
-                                "COALESCE(friday, '') AS friday," +
-                                "COALESCE(saturday, '') AS saturday," +
-                                "COALESCE(sunday, '') AS sunday," +
-                                "COALESCE(DATE_FORMAT(start_date, '%Y%m%d'), '') AS start_date," +
-                                "COALESCE(DATE_FORMAT(end_date, '%Y%m%d'), '') AS end_date" +
+                                "CONCAT('\"',COALESCE(service_id, ''), '\"') AS service_id," +
+                                "CONCAT('\"',COALESCE(monday, ''), '\"') AS monday," +
+                                "CONCAT('\"',COALESCE(tuesday, ''), '\"') AS tuesday," +
+                                "CONCAT('\"',COALESCE(wednesday, ''), '\"') AS wednesday," +
+                                "CONCAT('\"',COALESCE(thursday, ''), '\"') AS thursday," +
+                                "CONCAT('\"',COALESCE(friday, ''), '\"') AS friday," +
+                                "CONCAT('\"',COALESCE(saturday, ''), '\"') AS saturday," +
+                                "CONCAT('\"',COALESCE(sunday, ''), '\"') AS sunday," +
+                                "CONCAT('\"',COALESCE(DATE_FORMAT(start_date, '%Y%m%d'), ''), '\"') AS start_date," +
+                                "CONCAT('\"',COALESCE(DATE_FORMAT(end_date, '%Y%m%d'), ''), '\"') AS end_date" +
                                 " FROM calendar WHERE company_id = " + company_id + " ;");
 
         queries.put("calendar_dates", "SELECT " +
@@ -260,9 +260,9 @@ public class GtfsDatabaseInput extends GtfsInput {
                                    "'exception_type' AS exception_type" +
                                    " UNION " +
                                    " SELECT " +
-                                   "COALESCE(service_id, '') AS service_id," +
-                                   "COALESCE(DATE_FORMAT(date, '%Y%m%d'), '') AS date," +
-                                   "COALESCE(exception_type, '') AS exception_type" +
+                                   "CONCAT('\"',COALESCE(service_id, ''), '\"') AS service_id," +
+                                   "CONCAT('\"',COALESCE(DATE_FORMAT(date, '%Y%m%d'), ''), '\"') AS date," +
+                                   "CONCAT('\"',COALESCE(exception_type, ''), '\"') AS exception_type" +
                                    " FROM calendar_dates WHERE company_id = " + company_id + " ;");
 
         queries.put("fare_attributes", "SELECT " +
@@ -275,13 +275,13 @@ public class GtfsDatabaseInput extends GtfsInput {
                                        "'transfer_duration' AS transfer_duration" +
                                        " UNION " +
                                        " SELECT " +
-                                       "COALESCE(fare_id, '') AS fare_id," +
-                                       "COALESCE(price, '') AS price," +
-                                       "COALESCE(currency_type, '') AS currency_type," +
-                                       "COALESCE(payment_method, '') AS payment_method," +
-                                       "COALESCE(transfers, '') AS transfers," +
-                                       "COALESCE(agency_id, '') AS agency_id," +
-                                       "COALESCE(transfer_duration, '') AS transfer_duration" +
+                                       "CONCAT('\"', COALESCE(fare_id, ''), '\"') AS fare_id," +
+                                       "CONCAT('\"', COALESCE(price, ''), '\"') AS price," +
+                                       "CONCAT('\"', COALESCE(currency_type, ''), '\"') AS currency_type," +
+                                       "CONCAT('\"', COALESCE(payment_method, ''), '\"') AS payment_method," +
+                                       "CONCAT('\"', COALESCE(transfers, ''), '\"') AS transfers," +
+                                       "CONCAT('\"', COALESCE(agency_id, ''), '\"') AS agency_id," +
+                                       "CONCAT('\"', COALESCE(transfer_duration, ''), '\"') AS transfer_duration" +
                                        " FROM fare_attributes WHERE company_id = " + company_id + " ;");
 
         queries.put("fare_rules", "SELECT " +
@@ -292,11 +292,11 @@ public class GtfsDatabaseInput extends GtfsInput {
                                 "'contains_id' AS contains_id" +
                                 " UNION " +
                                 "SELECT " +
-                                "COALESCE(fare_id, '') AS fare_id," +
-                                "COALESCE(route_id, '') AS route_id," +
-                                "COALESCE(origin_id, '') AS origin_id," +
-                                "COALESCE(destination_id, '') AS destination_id," +
-                                "COALESCE(contains_id, '') AS contains_id" +
+                                "CONCAT('\"',COALESCE(fare_id, ''), '\"') AS fare_id," +
+                                "CONCAT('\"',COALESCE(route_id, ''), '\"') AS route_id," +
+                                "CONCAT('\"',COALESCE(origin_id, ''), '\"') AS origin_id," +
+                                "CONCAT('\"',COALESCE(destination_id, ''), '\"') AS destination_id," +
+                                "CONCAT('\"',COALESCE(contains_id, ''), '\"') AS contains_id" +
                                 " FROM fare_rules WHERE company_id = " + company_id + " ;");
 
         queries.put("shapes", "SELECT " +
@@ -307,11 +307,11 @@ public class GtfsDatabaseInput extends GtfsInput {
                               "'shape_dist_traveled' AS shape_dist_traveled" +
                               " UNION " +
                               " SELECT " +
-                              "COALESCE(shape_id, '') AS shape_id," +
-                              "COALESCE(shape_pt_lat, '') AS shape_pt_lat," +
-                              "COALESCE(shape_pt_lon, '') AS shape_pt_lon," +
-                              "COALESCE(shape_pt_sequence, '') AS shape_pt_sequence," +
-                              "COALESCE(ROUND(shape_dist_traveled,2), '') AS shape_dist_traveled" +
+                              "CONCAT('\"',COALESCE(shape_id, ''), '\"') AS shape_id," +
+                              "CONCAT('\"',COALESCE(shape_pt_lat, ''), '\"') AS shape_pt_lat," +
+                              "CONCAT('\"',COALESCE(shape_pt_lon, ''), '\"') AS shape_pt_lon," +
+                              "CONCAT('\"',COALESCE(shape_pt_sequence, ''), '\"') AS shape_pt_sequence," +
+                              "CONCAT('\"',COALESCE(ROUND(shape_dist_traveled,2), '') , '\"') AS shape_dist_traveled" +
                               " FROM shapes WHERE company_id = " + company_id + " ;");
 
         queries.put("frequencies", "SELECT " +
@@ -322,11 +322,11 @@ public class GtfsDatabaseInput extends GtfsInput {
                                    "'exact_times' AS exact_times" +
                                    " UNION " +
                                    " SELECT " +
-                                   "COALESCE(trip_id, '') AS trip_id," +
-                                   "COALESCE(start_time, '') AS start_time," +
-                                   "COALESCE(end_time, '') AS end_time," +
-                                   "COALESCE(headway_secs, '') AS headway_secs," +
-                                   "COALESCE(exact_times, '') AS exact_times" +
+                                   "CONCAT('\"', COALESCE(trip_id, ''), '\"') AS trip_id," +
+                                   "CONCAT('\"', COALESCE(start_time, ''), '\"') AS start_time," +
+                                   "CONCAT('\"', COALESCE(end_time, ''), '\"') AS end_time," +
+                                   "CONCAT('\"', COALESCE(headway_secs, ''), '\"') AS headway_secs," +
+                                   "CONCAT('\"', COALESCE(exact_times, ''), '\"') AS exact_times" +
                                    " FROM frequencies WHERE company_id = " + company_id + " ;");
 
         queries.put("feed_info", "SELECT " +
@@ -341,15 +341,15 @@ public class GtfsDatabaseInput extends GtfsInput {
                                  "'feed_contact_url' AS feed_contact_url" +
                                  " UNION " +
                                  " SELECT " +
-                                 "COALESCE(feed_publisher_name, '') AS feed_publisher_name," +
-                                 "COALESCE(feed_publisher_url, '') AS feed_publisher_url," +
-                                 "COALESCE(feed_lang, '') AS feed_lang," +
-                                 "COALESCE(default_lang, '') AS default_lang," +
-                                 "COALESCE(DATE_FORMAT(feed_start_date, '%Y%m%d'), '') AS feed_start_date," +
-                                 "COALESCE(DATE_FORMAT(feed_end_date, '%Y%m%d'), '') AS feed_end_date," +
-                                 "COALESCE(feed_version, '') AS feed_version," +
-                                 "COALESCE(feed_contact_email, '') AS feed_contact_email," +
-                                 "COALESCE(feed_contact_url, '') AS feed_contact_url" +
+                                 "CONCAT('\"', COALESCE(feed_publisher_name, ''), '\"') AS feed_publisher_name," +
+                                 "CONCAT('\"', COALESCE(feed_publisher_url, ''), '\"') AS feed_publisher_url," +
+                                 "CONCAT('\"', COALESCE(feed_lang, ''), '\"') AS feed_lang," +
+                                 "CONCAT('\"', COALESCE(default_lang, ''), '\"') AS default_lang," +
+                                 "CONCAT('\"', COALESCE(DATE_FORMAT(feed_start_date, '%Y%m%d'), ''), '\"') AS feed_start_date," +
+                                 "CONCAT('\"', COALESCE(DATE_FORMAT(feed_end_date, '%Y%m%d'), ''), '\"') AS feed_end_date," +
+                                 "CONCAT('\"', COALESCE(feed_version, ''), '\"') AS feed_version," +
+                                 "CONCAT('\"', COALESCE(feed_contact_email, ''), '\"') AS feed_contact_email," +
+                                 "CONCAT('\"', COALESCE(feed_contact_url, ''), '\"') AS feed_contact_url" +
                                  " FROM feed_info WHERE company_id = " + company_id + " ;");
 
         queries.put("attributions", "SELECT " +
@@ -366,17 +366,17 @@ public class GtfsDatabaseInput extends GtfsInput {
                                     "'attribution_phone' AS attribution_phone" +
                                     " UNION " +
                                     " SELECT " +
-                                    "COALESCE(attribution_id, '') AS attribution_id," +
-                                    "COALESCE(agency_id, '') AS agency_id," +
-                                    "COALESCE(route_id, '') AS route_id," +
-                                    "COALESCE(trip_id, '') AS trip_id," +
-                                    "COALESCE(organization_name, '') AS organization_name," +
-                                    "COALESCE(is_producer, '') AS is_producer," +
-                                    "COALESCE(is_operator, '') AS is_operator," +
-                                    "COALESCE(is_authority, '') AS is_authority," +
-                                    "COALESCE(attribution_url, '') AS attribution_url," +
-                                    "COALESCE(attribution_email, '') AS attribution_email," +
-                                    "COALESCE(attribution_phone, '') AS attribution_phone" +
+                                    "CONCAT('\"', COALESCE(attribution_id, ''), '\"') AS attribution_id," +
+                                    "CONCAT('\"', COALESCE(agency_id, ''), '\"') AS agency_id," +
+                                    "CONCAT('\"', COALESCE(route_id, ''), '\"') AS route_id," +
+                                    "CONCAT('\"', COALESCE(trip_id, ''), '\"') AS trip_id," +
+                                    "CONCAT('\"', COALESCE(organization_name, ''), '\"') AS organization_name," +
+                                    "CONCAT('\"', COALESCE(is_producer, ''), '\"') AS is_producer," +
+                                    "CONCAT('\"', COALESCE(is_operator, ''), '\"') AS is_operator," +
+                                    "CONCAT('\"', COALESCE(is_authority, ''), '\"') AS is_authority," +
+                                    "CONCAT('\"', COALESCE(attribution_url, ''), '\"') AS attribution_url," +
+                                    "CONCAT('\"', COALESCE(attribution_email, ''), '\"') AS attribution_email," +
+                                    "CONCAT('\"', COALESCE(attribution_phone, ''), '\"') AS attribution_phone" +
                                     " FROM attributions WHERE company_id = " + company_id + " ;");
 
         queries.put("transfers", "SELECT " +
@@ -386,10 +386,10 @@ public class GtfsDatabaseInput extends GtfsInput {
                                  "'min_transfer_time' AS min_transfer_time" +
                                  " UNION " +
                                  " SELECT " +
-                                 "COALESCE(from_stop_id, '') AS from_stop_id," +
-                                 "COALESCE(to_stop_id, '') AS to_stop_id," +
-                                 "COALESCE(transfer_type, '') AS transfer_type," +
-                                 "COALESCE(min_transfer_time, '') AS min_transfer_time" +
+                                 "CONCAT('\"', COALESCE(from_stop_id, ''), '\"') AS from_stop_id," +
+                                 "CONCAT('\"', COALESCE(to_stop_id, ''), '\"') AS to_stop_id," +
+                                 "CONCAT('\"', COALESCE(transfer_type, ''), '\"') AS transfer_type," +
+                                 "CONCAT('\"', COALESCE(min_transfer_time, ''), '\"') AS min_transfer_time" +
                                  " FROM transfers WHERE company_id = " + company_id + " ;");
 
         queries.put("translations", "SELECT " +
@@ -402,13 +402,13 @@ public class GtfsDatabaseInput extends GtfsInput {
                                     "'field_value' AS field_value" +
                                     " UNION " +
                                     " SELECT " +
-                                    "COALESCE(table_name, '') AS table_name," +
-                                    "COALESCE(field_name, '') AS field_name," +
-                                    "COALESCE(language, '') AS language," +
-                                    "COALESCE(translation, '') AS translation," +
-                                    "COALESCE(record_id, '') AS record_id," +
-                                    "COALESCE(record_sub_id, '') AS record_sub_id," +
-                                    "COALESCE(field_value, '') AS field_value" +
+                                    "CONCAT('\"', COALESCE(table_name, ''), '\"') AS table_name," +
+                                    "CONCAT('\"', COALESCE(field_name, ''), '\"') AS field_name," +
+                                    "CONCAT('\"', COALESCE(language, ''), '\"') AS language," +
+                                    "CONCAT('\"', COALESCE(translation, ''), '\"') AS translation," +
+                                    "CONCAT('\"', COALESCE(record_id, ''), '\"') AS record_id," +
+                                    "CONCAT('\"', COALESCE(record_sub_id, ''), '\"') AS record_sub_id," +
+                                    "CONCAT('\"', COALESCE(field_value, ''), '\"') AS field_value" +
                                     " FROM working_data.translations WHERE company_id = " + company_id + " ;");
 
         return queries.get(tableName);
