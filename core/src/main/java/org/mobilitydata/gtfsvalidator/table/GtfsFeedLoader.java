@@ -22,8 +22,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.flogger.FluentLogger;
 import java.io.InputStream;
-import java.sql.SQLException;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -135,7 +133,7 @@ public class GtfsFeedLoader {
                 () -> {
                   NoticeContainer loaderNotices = new NoticeContainer();
                   GtfsEntityContainer<?, ?> tableContainer;
-              // The descriptor knows what loader to use to load the file
+                  // The descriptor knows what loader to use to load the file
               TableLoader tableLoader = tableDescriptor.getTableLoader();
               tableLoader.setSkippedValidators(skippedValidators);    try (InputStream inputStream = gtfsInput.getFile(filename)) {
                     try {
