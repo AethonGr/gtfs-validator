@@ -43,6 +43,9 @@ public class GtfsDatabaseInput extends GtfsInput {
         }
 
         String connection_url = "jdbc:mysql://" + host + ":3306/" + this.db;
+        if (host != null && (host.contains("digitalocean.com") || host.contains("amazonaws.com") || host.contains("rds."))) {
+            connection_url += "?sslMode=REQUIRED";
+        }
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
