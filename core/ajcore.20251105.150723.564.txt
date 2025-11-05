@@ -1,0 +1,141 @@
+---- AspectJ Properties ---
+AspectJ Compiler 1.9.20 built on Tuesday Aug 15, 2023 at 23:35:34 PDT
+---- Dump Properties ---
+Dump file: ajcore.20251105.150723.564.txt
+Dump reason: java.lang.NullPointerException
+Dump on exception: true
+Dump at exit condition: abort
+---- Exception Information ---
+java.lang.NullPointerException: Cannot invoke "org.aspectj.org.eclipse.jdt.internal.compiler.util.JrtFileSystem.walkModuleImage(org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil$JrtFileVisitor, int)" because the return value of "org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil.getJrtSystem(java.io.File, String)" is null
+	at org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil.walkModuleImage(JRTUtil.java:241)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.ClasspathJrt.lambda$1(ClasspathJrt.java:212)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.ClasspathJrt.loadModules(ClasspathJrt.java:209)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.ClasspathJrt.initialize(ClasspathJrt.java:205)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.FileSystem.getClasspath(FileSystem.java:387)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.FileSystem.getClasspath(FileSystem.java:319)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildConfig.processStringPath(AjBuildConfig.java:267)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildConfig.computeCheckedClasspath(AjBuildConfig.java:946)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildConfig.getCheckedClasspaths(AjBuildConfig.java:274)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.getLibraryAccess(AjBuildManager.java:944)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.performCompilation(AjBuildManager.java:1045)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.performBuild(AjBuildManager.java:275)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.batchBuild(AjBuildManager.java:188)
+	at org.aspectj.ajdt.ajc.AjdtCommand.doCommand(AjdtCommand.java:103)
+	at org.aspectj.ajdt.ajc.AjdtCommand.runCommand(AjdtCommand.java:47)
+	at org.aspectj.tools.ajc.Main.run(Main.java:374)
+	at org.aspectj.tools.ajc.Main.runMain(Main.java:253)
+	at org.aspectj.tools.ajc.Main.main(Main.java:84)
+---- System Properties ---
+java.specification.version=18
+sun.cpu.isalist=amd64
+sun.jnu.encoding=Cp1252
+java.class.path=C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.aspectj\aspectjtools\1.9.20\3f819b7fe81feeb418b982d9d7bf3d8f59930f88\aspectjtools-1.9.20.jar
+java.vm.vendor=Oracle Corporation
+sun.arch.data.model=64
+user.variant=
+java.vendor.url=https://java.oracle.com/
+user.timezone=Europe/Athens
+java.vm.specification.version=18
+os.name=Windows 11
+user.country=US
+sun.java.launcher=SUN_STANDARD
+sun.boot.library.path=C:\Program Files\Java\jdk-18\bin
+sun.java.command=org.aspectj.tools.ajc.Main -argfile C:\Users\aetho\Documents\Transitool\gtfs-validator\core\build\tmp\compileJava\ajc.options
+jdk.debug=release
+sun.cpu.endian=little
+user.home=C:\Users\aetho
+user.language=en
+java.specification.vendor=Oracle Corporation
+java.version.date=2022-03-22
+java.home=C:\Program Files\Java\jdk-18
+file.separator=\
+java.vm.compressedOopsMode=Zero based
+line.separator=
+
+java.vm.specification.vendor=Oracle Corporation
+java.specification.name=Java Platform API Specification
+user.script=
+sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+java.runtime.version=18+36-2087
+user.name=aetho
+path.separator=;
+os.version=10.0
+java.runtime.name=OpenJDK Runtime Environment
+file.encoding=UTF-8
+java.vm.name=OpenJDK 64-Bit Server VM
+java.vendor.url.bug=https://bugreport.java.com/bugreport/
+java.io.tmpdir=C:\Users\aetho\AppData\Local\Temp\
+java.version=18
+user.dir=C:\Users\aetho\Documents\Transitool\gtfs-validator\core
+os.arch=amd64
+java.vm.specification.name=Java Virtual Machine Specification
+sun.os.patch.level=
+native.encoding=Cp1252
+java.library.path=C:\Program Files\Java\jdk-18\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk-23\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\aetho\apache-maven-3.9.9\bin;C:\Users\aetho\AppData\Roaming\Python\Scripts;C:\Program Files\dotnet\;c:\Users\aetho\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Cloudflare\Cloudflare WARP\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\aetho\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\aetho\AppData\Local\Programs\Python\Python310\;C:\Users\aetho\AppData\Local\Microsoft\WindowsApps;C:\Users\aetho\AppData\Local\JetBrains\Toolbox\scripts;C:\Program Files\JetBrains\PyCharm Community Edition 2024.2.1\bin;;C:\Users\aetho\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\aetho\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;C:\Users\aetho\AppData\Roaming\npm;C:\Users\aetho\apache-maven-3.9.9\bin;C:\Users\aetho\AppData\Local\Microsoft\WindowsApps;C:\Users\aetho\AppData\Roaming\Python\Scripts;;C:\Users\aetho\AppData\Local\Programs\Ollama;C:\Users\aetho\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\aetho\.doctl;.
+java.vm.info=mixed mode, sharing
+java.vendor=Oracle Corporation
+java.vm.version=18+36-2087
+sun.io.unicode.encoding=UnicodeLittle
+java.class.version=62.0
+---- Command Line ---
+-argfile
+C:\Users\aetho\Documents\Transitool\gtfs-validator\core\build\tmp\compileJava\ajc.options
+---- Full Classpath ---
+C:\Program Files\Java\jdk-18\lib\jrt-fs.jar(110496 bytes)
+C:\Users\aetho\Documents\Transitool\gtfs-validator\core\build\classes\java\main(1 entries)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.auto.value\auto-value-annotations\1.7.4\eff48ed53995db2dadf0456426cc1f8700136f86\auto-value-annotations-1.7.4.jar(6589 bytes)
+C:\Users\aetho\Documents\Transitool\gtfs-validator\model\build\libs\model-6.0.1-SNAPSHOT.jar(21075 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.20\b8df472b31e1f17c232d2ad78ceb1c84e00c641b\commons-compress-1.20.jar(632424 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.0\8873bd0bb5cb9ee37f1b04578eb7e26fcdd44cb0\commons-lang3-3.0.jar(306008 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar(2497 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.5.2\733db77aa8d9b2d68015189df76ab06304406e50\httpclient-4.5.2.jar(736658 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.8.0\92999e26e6534606b5678014e66948286298a35c\commons-io-2.8.0.jar(285424 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.univocity\univocity-parsers\2.9.0\7915669207fc99c1d9b1ee0435cfd94479e9d9b6\univocity-parsers-2.9.0.jar(443986 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.6\9180733b7df8542621dc12e21e87557e8c99b8cb\gson-2.8.6.jar(240255 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.geometry\s2-geometry\2.0.0\96385cfc9ee5269b1e20438c3ef9cc0809ab77cb\s2-geometry-2.0.0.jar(513620 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\31.0.1-jre\119ea2b2bc205b138974d351777b20f02b92704b\guava-31.0.1-jre.jar(2974216 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.javassist\javassist\3.29.2-GA\6c32028609e5dd4a1b78e10fbcd122b09b3928b1\javassist-3.29.2-GA.jar(794137 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\commons-validator\commons-validator\1.6\e989d1e87cdd60575df0765ed5bac65c905d7908\commons-validator-1.6.jar(186077 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.googlecode.libphonenumber\libphonenumber\8.12.13\635736ffe6ee42b12def675f4f0613c590f50920\libphonenumber-8.12.13.jar(350096 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.flogger\flogger\0.6\155dc6e303a58f7bbff5d2cd1a259de86827f4fe\flogger-0.6.jar(172930 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\io.github.classgraph\classgraph\4.8.146\360448a09bfa5689d89cfa97fea53b3fdefa9c23\classgraph-4.8.146.jar(557577 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.aspectj\aspectjrt\1.9.20\a950c7baef908470d0dff23a52cc805b87abf3a0\aspectjrt-1.9.20.jar(127145 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.aspectj\aspectjweaver\1.9.20\da562407e43f74c0f8f5f5df4065d85ec1736d01\aspectjweaver-1.9.20.jar(2099432 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.4.4\b31526a230871fbe285fbcbe2813f9c0839ae9b0\httpcore-4.4.4.jar(326724 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\commons-beanutils\commons-beanutils\1.9.2\7a87d845ad3a155297e8f67d9008f4c1e5656b71\commons-beanutils-1.9.2.jar(233859 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\commons-logging\commons-logging\1.2\4bfc12adfe4842bf07b657f0369c4cb522955686\commons-logging-1.2.jar(61829 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.9\9ce04e34240f674bc72680f8b843b1457383161a\commons-codec-1.9.jar(263965 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.guava\failureaccess\1.0.1\1dcf1de382a0bf95a3d8b0849546c88bac1292c9\failureaccess-1.0.1.jar(4617 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\b421526c5f297295adef1c886e5246c39d4ac629\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar(2199 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.2\25ea2e8b0c338a877313bd4672d3fe056ea78f0d\jsr305-3.0.2.jar(19936 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.checkerframework\checker-qual\3.12.0\d5692f0526415fcc6de94bb5bfbd3afd9dd3b3e5\checker-qual-3.12.0.jar(208835 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.errorprone\error_prone_annotations\2.7.1\458d9042f7aa6fa9a634df902b37f544e15aacac\error_prone_annotations-2.7.1.jar(14835 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\com.google.j2objc\j2objc-annotations\1.3\ba035118bc8bac37d7eff77700720999acd9986d\j2objc-annotations-1.3.jar(8781 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\commons-digester\commons-digester\1.8.1\3dec9b9c7ea9342d4dbe8c38560080d85b44a015\commons-digester-1.8.1.jar(146108 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\commons-collections\commons-collections\3.2.2\8ad72fe39fa8c91eaaf12aadb21e0c3661fe26d5\commons-collections-3.2.2.jar(588337 bytes)
+C:\Users\aetho\.gradle\caches\modules-2\files-2.1\org.checkerframework\checker-compat-qual\2.5.3\45f92d2e0676d05ae9297269b8268f93a875d4a\checker-compat-qual-2.5.3.jar(5816 bytes)
+---- Compiler Messages ---
+abort ABORT -- (NullPointerException) Cannot invoke "org.aspectj.org.eclipse.jdt.internal.compiler.util.JrtFileSystem.walkModuleImage(org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil$JrtFileVisitor, int)" because the return value of "org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil.getJrtSystem(java.io.File, String)" is null
+Cannot invoke "org.aspectj.org.eclipse.jdt.internal.compiler.util.JrtFileSystem.walkModuleImage(org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil$JrtFileVisitor, int)" because the return value of "org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil.getJrtSystem(java.io.File, String)" is null
+java.lang.NullPointerException: Cannot invoke "org.aspectj.org.eclipse.jdt.internal.compiler.util.JrtFileSystem.walkModuleImage(org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil$JrtFileVisitor, int)" because the return value of "org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil.getJrtSystem(java.io.File, String)" is null
+	at org.aspectj.org.eclipse.jdt.internal.compiler.util.JRTUtil.walkModuleImage(JRTUtil.java:241)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.ClasspathJrt.lambda$1(ClasspathJrt.java:212)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.ClasspathJrt.loadModules(ClasspathJrt.java:209)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.ClasspathJrt.initialize(ClasspathJrt.java:205)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.FileSystem.getClasspath(FileSystem.java:387)
+	at org.aspectj.org.eclipse.jdt.internal.compiler.batch.FileSystem.getClasspath(FileSystem.java:319)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildConfig.processStringPath(AjBuildConfig.java:267)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildConfig.computeCheckedClasspath(AjBuildConfig.java:946)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildConfig.getCheckedClasspaths(AjBuildConfig.java:274)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.getLibraryAccess(AjBuildManager.java:944)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.performCompilation(AjBuildManager.java:1045)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.performBuild(AjBuildManager.java:275)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.batchBuild(AjBuildManager.java:188)
+	at org.aspectj.ajdt.ajc.AjdtCommand.doCommand(AjdtCommand.java:103)
+	at org.aspectj.ajdt.ajc.AjdtCommand.runCommand(AjdtCommand.java:47)
+	at org.aspectj.tools.ajc.Main.run(Main.java:374)
+	at org.aspectj.tools.ajc.Main.runMain(Main.java:253)
+	at org.aspectj.tools.ajc.Main.main(Main.java:84)
+

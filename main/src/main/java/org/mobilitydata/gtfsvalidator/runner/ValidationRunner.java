@@ -82,7 +82,6 @@ public class ValidationRunner {
     // and exclude from the metric the generation of the reports.
     var memoryBefore =
         MemoryUsageRegister.getInstance().getMemoryUsageSnapshot("ValidationRunner.run", null);
-  public Status run(ValidationRunnerConfig config) throws SQLException {
     VersionInfo versionInfo =
         versionResolver.getVersionInfoWithTimeout(
             Duration.ofSeconds(5), config.skipValidatorUpdate());
