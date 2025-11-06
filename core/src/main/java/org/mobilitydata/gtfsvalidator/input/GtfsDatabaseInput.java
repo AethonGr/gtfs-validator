@@ -31,6 +31,8 @@ public class GtfsDatabaseInput extends GtfsInput {
         String host = null;
         String user = null;
         String password = null;
+        String port = null;
+
 
         if (System.getenv("DATABASE_HOST") != null || System.getenv("DATABASE_USER") != null || System.getenv("DATABASE_PASSWORD") != null) {
             host = System.getenv("DATABASE_HOST");
@@ -41,7 +43,7 @@ public class GtfsDatabaseInput extends GtfsInput {
             host = "localhost";
             user = "root";
             password = "0112358";
-            port = "33306"
+            port = "3306";
         }
 
         String connection_url = "jdbc:mysql://" + host + ":" + port + "/" + this.db;
