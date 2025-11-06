@@ -36,13 +36,15 @@ public class GtfsDatabaseInput extends GtfsInput {
             host = System.getenv("DATABASE_HOST");
             user = System.getenv("DATABASE_USER");
             password = System.getenv("DATABASE_PASSWORD");
+            port = System.getenv("DATABASE_PORT");
         } else {
             host = "localhost";
             user = "root";
             password = "0112358";
+            port = "33306"
         }
 
-        String connection_url = "jdbc:mysql://" + host + ":3306/" + this.db;
+        String connection_url = "jdbc:mysql://" + host + ":" + port + "/" + this.db;
         if (host != null && (host.contains("digitalocean.com") || host.contains("amazonaws.com") || host.contains("rds."))) {
             connection_url += "?sslMode=REQUIRED";
         }
