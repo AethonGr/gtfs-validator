@@ -13,20 +13,16 @@ public class ResultSetAsInputStream extends InputStream {
     private byte[] buffer;
     private int position;
 
-    public ResultSetAsInputStream(final Connection connection, final String sql, final int ColumnCount, final Object... parameters) throws SQLException {
+    public ResultSetAsInputStream(final Connection connection, final String sql, final int ColumnCount) throws SQLException {
         this.ColumnCount = ColumnCount;
-        statement = createStatement(connection, sql, parameters);
+        statement = createStatement(connection, sql);
         resultSet = statement.executeQuery();
     }
 
-    private static PreparedStatement createStatement(final Connection connection, final String sql, final Object[] parameters) throws SQLException {
-        // PreparedStatement should be created here from passed connection, sql and parameters
+    private static PreparedStatement createStatement(final Connection connection, final String sql) throws SQLException {
         PreparedStatement prepStatement=connection.prepareStatement(sql);
-        if (parameters.length > 0) {
-            prepStatement.setInt(1, (Integer) parameters[0]);
-            // Set the offset
-            prepStatement.setInt(2, (Integer) parameters[1]);
-        }
+        // Fetch the rows in batches instead of loading the whole result (needs a connection without autocommit)
+        prepStatement.setFetchSize(50000);
         return prepStatement;
     }
 
